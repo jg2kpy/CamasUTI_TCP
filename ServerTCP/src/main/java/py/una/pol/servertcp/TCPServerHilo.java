@@ -2,6 +2,10 @@ package py.una.pol.servertcp;
 
 import java.net.*;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.json.simple.parser.ParseException;
+import py.una.pol.servertcp.clases.Mensaje;
 
 public class TCPServerHilo extends Thread {
 
@@ -23,18 +27,16 @@ public class TCPServerHilo extends Thread {
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
             
-            out.println("Bienvenido!");
-            String inputLine, outputLine;
+            String inputLine;
             
+            Mensaje enviarCliente = new Mensaje(0,"ok",6,"Tratado de iniciar conexion TCP");//6 iniciar comunicacion
+            out.println(enviarCliente.toJSON());
             
             while ((inputLine = in.readLine()) != null) {
                 System.out.println("Mensaje recibido: " + inputLine);
-                outputLine = stdIn.readLine();
-                if (outputLine != null) {
-                    System.out.println("Server: " + outputLine);
-                    //escribimos al cliente
-                    out.println(outputLine);
-		}
+                Mensaje recibidoServidor = new Mensaje(inputLine); 
+                //enviarCliente = procesarMensaje(recibidoServidor);
+                out.println(enviarCliente.toJSON());           
             }
             
             out.close();
@@ -44,6 +46,8 @@ public class TCPServerHilo extends Thread {
 
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (ParseException ex) {
+            Logger.getLogger(TCPServerHilo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

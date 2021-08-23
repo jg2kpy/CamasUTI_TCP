@@ -2,6 +2,7 @@ package py.una.pol.clientetcp;
 
 import java.io.*;
 import java.net.*;
+import py.una.pol.clientetcp.clases.Mensaje;
 
 public class TCPClient {
 
@@ -49,23 +50,23 @@ public class TCPClient {
         
         BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
         String fromServer;
-        String fromUser;
+        Mensaje enviaraServidor = null;
         
 	try{
             while ((fromServer = in.readLine()) != null) {
-		System.out.println("Servidor: " + fromServer);
-		fromUser = stdIn.readLine();
-		if (fromUser != null) {
-                    System.out.println("Cliente: " + fromUser);
-                        //escribimos al servidor
-			out.println(fromUser);
-                    }
-		}
+		Mensaje recibidoServidor = new Mensaje(fromServer);
+                System.out.println("Server: "+fromServer);
+                //Mensaje enviaraServidor = procesarMensaje(recibidoServidor);
+                if(enviaraServidor!=null){
+                    out.println(enviaraServidor.toJSON());
+                }else{
+                    System.out.println("ERROR");
+                }
+            }
 	}catch(SocketTimeoutException exTime){
 		System.out.println("Tiempo de espera agotado para recepcion de datos del servidor " );
 	}
 		
-        
         out.close();
         in.close();
         stdIn.close();
