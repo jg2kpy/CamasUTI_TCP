@@ -80,6 +80,7 @@ public class Menu {
 				retorno[0] = 6;
 				retorno[1] = -2;
 				return retorno;
+			
 			default:                
 				break;
 		}

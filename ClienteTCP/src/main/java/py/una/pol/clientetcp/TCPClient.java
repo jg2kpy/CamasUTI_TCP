@@ -104,7 +104,7 @@ public class TCPClient {
                 // ###imprimir el cuerpo####
 			}
 			
-			opcion = menuCLI();
+			opcion = Menu();
             String cuerpo;
 				
 			//por defecto
@@ -128,6 +128,12 @@ public class TCPClient {
                     String login = menuLogin();
                     retorno = new Mensaje(0,"ok",7,login);
                     break;
+                case 8:
+                    retorno = new Mensaje(0,"ok",1,"0");
+                    break;
+                //case 69:
+                //    retorno = new Mensaje(0,"ok",69,menuRoot(recibidoServidor.getCuerpo()));
+                //    break;
 				
 				
 				default:
