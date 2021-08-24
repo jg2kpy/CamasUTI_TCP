@@ -13,6 +13,7 @@ public class Menu {
     }
     
     public static String nombreHospital;
+    public static String estadoActual ="";
     
     public static String menuLogin(){   
         System.out.println("Que usuario desea usar?");
@@ -23,7 +24,7 @@ public class Menu {
         return nombreHospital + ":" + pass;
     }
     
-    
+
     // futura implementacion del menu en UI
     public static int[] Menu(){
     //retorna un vector de 2 elementos, 
@@ -89,4 +90,25 @@ public class Menu {
         retorno[1] = sc.nextInt();
         return retorno;
     }  
+    
+    
+
+
+    public static void imprimirEstado(){
+        System.out.println(formateo(estadoActual));
+    }
+
+    public static String formateo(String estadoActual){
+        String retorno = "";
+        for(int i=0;i<estadoActual.length();i++){
+            retorno = retorno + "Cama N "+i+": ";
+            if(estadoActual.charAt(i) == 'T'){
+                retorno = retorno + "Ocupado"+'\n';
+            }else{
+                retorno = retorno + "Desocupado"+'\n';
+            }
+        }
+        return retorno;
+    }
 }
+

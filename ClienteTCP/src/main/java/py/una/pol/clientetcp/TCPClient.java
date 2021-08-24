@@ -69,6 +69,9 @@ public class TCPClient {
                     //mandamos la respuesta al servidor
                     if(enviaraServidor!=null){
                         out.println(enviaraServidor.toJSON());
+                        if(enviaraServidor.getCuerpo().equals("Desconexion")){
+                            break;
+                        }
                     }else{
                         System.out.println("ERROR");
                     }
@@ -85,6 +88,8 @@ public class TCPClient {
 
 
     public static Mensaje procesarMensaje(Mensaje recibidoServidor){
+    //procesa lo recibido del servidor y la entrada del menú para saber
+    //que responder de vuelta al servidor
         Mensaje retorno = null;
         
         // solo si es 0 es operacion exitosa
@@ -102,18 +107,20 @@ public class TCPClient {
             //tipo 1 es ver_estado
             if((tipo==1) && !(recibidoServidor.getCuerpo().equals(""))){
                 // ###imprimir el cuerpo####
+                Menu.estadoActual = recibidoServidor.getCuerpo();
+                Menu.imprimirEstado();
             }
             
-            opcion = menuCLI();
+            opcion = menuCLI(); //retorna lo que eligio el cliente
             String cuerpo;
                 
             //por defecto
                 cuerpo = Integer.toString(opcion[1]);
             if (opcion[1] == -1){
-                cuerpo = "deslogueo";
+                cuerpo = "Deslogueo";
             }
             if (opcion[1] == -2){
-                cuerpo = "Desconexión";
+                cuerpo = "Desconexion";
             }
             
             retorno = new Mensaje(0,"ok",opcion[0],cuerpo);
