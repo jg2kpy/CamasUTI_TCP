@@ -4,6 +4,8 @@ import java.io.*;
 import java.net.*;
 import static py.una.pol.clientetcp.Menu.menuError;
 import static py.una.pol.clientetcp.Menu.Menu;
+import static py.una.pol.clientetcp.Menu.menuCLI;
+import static py.una.pol.clientetcp.Menu.menuLogin;
 import py.una.pol.clientetcp.clases.Mensaje;
 
 public class TCPClient {
@@ -102,7 +104,7 @@ public class TCPClient {
                 // ###imprimir el cuerpo####
 			}
 			
-			opcion = Menu();
+			opcion = menuCLI();
             String cuerpo;
 				
 			//por defecto
@@ -119,8 +121,13 @@ public class TCPClient {
 		//otros tipos a considerar
 
 			switch (tipo) {
-				case 6: //conexion tcp establecida
-				case 7: //inicio de sesion
+				case 6: // conexion TCP establecida
+                    retorno = new Mensaje(0,"ok",6,"Conexion TCP establecida");
+                    break;
+				case 7: // inicio se sesion 
+                    String login = menuLogin();
+                    retorno = new Mensaje(0,"ok",7,login);
+                    break;
 				
 				
 				default:
