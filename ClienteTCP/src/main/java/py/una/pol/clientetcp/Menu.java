@@ -23,70 +23,70 @@ public class Menu {
         return nombreHospital + ":" + pass;
     }
     
-
-	// futura implementacion del menu en UI
+    
+    // futura implementacion del menu en UI
     public static int[] Menu(){
-	//retorna un vector de 2 elementos, 
-	//	el primero es el tipo_operacion del mensaje que se va a enviar
-	//	el segundo es el cuerpo del mensaje que se va a enviar
+    //retorna un vector de 2 elementos, 
+    //    el primero es el tipo_operacion del mensaje que se va a enviar
+    //    el segundo es el cuerpo del mensaje que se va a enviar
         
         int[] retorno = new int[2];
-		retorno[0] = 1;
-		retorno[1] = 1;
-		
-		
+        retorno[0] = 1;
+        retorno[1] = 1;
+        
+        
         return retorno;
     }
-	
-	public static int[] menuCLI(){
+    
+    public static int[] menuCLI(){
 
-		int[] retorno = new int[2];
+        int[] retorno = new int[2];
 
-		System.out.println("Que desea hacer?");
-		System.out.println("1: ver_estado");
-		System.out.println("2: crear_cama");
-		System.out.println("3: eliminar_cama");
-		System.out.println("4: ocupar_cama");
-		System.out.println("5: desocupar_cama");
-		System.out.println("6: desloguear");
-		System.out.println("7: salir");
+        System.out.println("Que desea hacer?");
+        System.out.println("1: ver_estado");
+        System.out.println("2: crear_cama");
+        System.out.println("3: eliminar_cama");
+        System.out.println("4: ocupar_cama");
+        System.out.println("5: desocupar_cama");
+        System.out.println("6: desloguear");
+        System.out.println("7: salir");
 
-		Scanner sc = new Scanner(System.in);
-		int opt = sc.nextInt();
+        Scanner sc = new Scanner(System.in);
+        int opt = sc.nextInt();
 
-		retorno[0] = opt;
+        retorno[0] = opt;
 
-		switch (opt) {
-			case 1:
-				System.out.println("Estado actual de: "+nombreHospital);
-				retorno[1] = 0;
-				return retorno;      
-			case 2:
-				System.out.println("Cuantas camas desea agregar?");
-				break;
-			case 3:
-				System.out.println("Cuantas camas desea eliminar?");
-				break;
-			case 4:
-				System.out.println("Que cama desea ocupar?");
-				break;
-			case 5:
-				System.out.println("Que cama desea desocupar?");
-				break;  
-			case 6:
-				System.out.println("Deslogueando de seccion: "+nombreHospital);
-				retorno[1] = -1;
-				return retorno;
-			case 7:
-				System.out.println("Matando proceso cliente");
-				retorno[0] = 6;
-				retorno[1] = -2;
-				return retorno;
-			
-			default:                
-				break;
-		}
-		retorno[1] = sc.nextInt();
-		return retorno;
+        switch (opt) {
+            case 1:
+                System.out.println("Estado actual de: "+nombreHospital);
+                retorno[1] = 0;
+                return retorno;      
+            case 2:
+                System.out.println("Cuantas camas desea agregar?");
+                break;
+            case 3:
+                System.out.println("Cuantas camas desea eliminar?");
+                break;
+            case 4:
+                System.out.println("Que cama desea ocupar?");
+                break;
+            case 5:
+                System.out.println("Que cama desea desocupar?");
+                break;  
+            case 6:
+                System.out.println("Deslogueando de seccion: "+nombreHospital);
+                retorno[1] = -1;
+                return retorno;
+            case 7:
+                System.out.println("Matando proceso cliente");
+                retorno[0] = 6;
+                retorno[1] = -2;
+                return retorno;
+            
+            default:                
+                break;
+        }
+        retorno[1] = sc.nextInt();
+        return retorno;
     }  
 }

@@ -16,7 +16,7 @@ public class TCPClient {
         PrintWriter out = null;
         BufferedReader in = null;
         int TimeOutConexion = 7000; //milisegundos
-		int TimeOutRecepcion = 5000; //milisegundos
+        int TimeOutRecepcion = 5000; //milisegundos
         long ini = 0;
         long fin = 0;
 
@@ -27,10 +27,10 @@ public class TCPClient {
             //SocketAddress sockaddr = new InetSocketAddress("200.10.229.161", 8080);
             kkSocket = new Socket();
 
-   	    ini = System.currentTimeMillis();
+           ini = System.currentTimeMillis();
             kkSocket.connect(sockaddr, TimeOutConexion);
             kkSocket.setSoTimeout(TimeOutRecepcion);
-			
+            
             // enviamos nosotros
             out = new PrintWriter(kkSocket.getOutputStream(), true);
 
@@ -55,76 +55,76 @@ public class TCPClient {
         BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
         String fromServer;
         Mensaje enviaraServidor = null;
-		Mensaje recibidoServidor = null;
+        Mensaje recibidoServidor = null;
         
-		////COMUNICACION////////////////////////////////////////////////////////
-		try{
-				while ((fromServer = in.readLine()) != null) {
-					// recibimos el mensaje del servidor
-					recibidoServidor = new Mensaje(fromServer);
+        ////COMUNICACION////////////////////////////////////////////////////////
+        try{
+                while ((fromServer = in.readLine()) != null) {
+                    // recibimos el mensaje del servidor
+                    recibidoServidor = new Mensaje(fromServer);
 
-					//procesamos lo recibido y preparamos nuestra respuesta
-					enviaraServidor = procesarMensaje(recibidoServidor);
+                    //procesamos lo recibido y preparamos nuestra respuesta
+                    enviaraServidor = procesarMensaje(recibidoServidor);
 
-					//mandamos la respuesta al servidor
-					if(enviaraServidor!=null){
-						out.println(enviaraServidor.toJSON());
-					}else{
-						System.out.println("ERROR");
-					}
-				}
-		}catch(SocketTimeoutException exTime){
-			System.out.println("Tiempo de espera agotado para recepcion de datos del servidor " );
-		}
-		////FIN DE COMUNICACION/////////////////////////////////////////////////
-		out.close();
-		in.close();
-		stdIn.close();
-		kkSocket.close();
-	}
-
-
-	public static Mensaje procesarMensaje(Mensaje recibidoServidor){
-		Mensaje retorno = null;
-		
-    	// solo si es 0 es operacion exitosa
-		// si el estado es !=0 el cuerpo es el mensaje de error
-		if (recibidoServidor.getEstado()!=0){
-			menuError(recibidoServidor.getMensaje());
-		}
+                    //mandamos la respuesta al servidor
+                    if(enviaraServidor!=null){
+                        out.println(enviaraServidor.toJSON());
+                    }else{
+                        System.out.println("ERROR");
+                    }
+                }
+        }catch(SocketTimeoutException exTime){
+            System.out.println("Tiempo de espera agotado para recepcion de datos del servidor " );
+        }
+        ////FIN DE COMUNICACION/////////////////////////////////////////////////
+        out.close();
+        in.close();
+        stdIn.close();
+        kkSocket.close();
+    }
 
 
-		int[] opcion;
-		int tipo = recibidoServidor.getTipo_operacion();
-		
-		// para los casos comunes de tipo
-		if (tipo>=1 && tipo<=5){
-			//tipo 1 es ver_estado
-			if((tipo==1) && !(recibidoServidor.getCuerpo().equals(""))){
+    public static Mensaje procesarMensaje(Mensaje recibidoServidor){
+        Mensaje retorno = null;
+        
+        // solo si es 0 es operacion exitosa
+        // si el estado es !=0 el cuerpo es el mensaje de error
+        if (recibidoServidor.getEstado()!=0){
+            menuError(recibidoServidor.getMensaje());
+        }
+
+
+        int[] opcion;
+        int tipo = recibidoServidor.getTipo_operacion();
+        
+        // para los casos comunes de tipo
+        if (tipo>=1 && tipo<=5){
+            //tipo 1 es ver_estado
+            if((tipo==1) && !(recibidoServidor.getCuerpo().equals(""))){
                 // ###imprimir el cuerpo####
-			}
-			
-			opcion = menuCLI();
+            }
+            
+            opcion = menuCLI();
             String cuerpo;
-				
-			//por defecto
-				cuerpo = Integer.toString(opcion[1]);
-			if (opcion[1] == -1){
-				cuerpo = "deslogueo";
-			}
-			if (opcion[1] == -2){
-				cuerpo = "Desconexión";
-			}
-			
-			retorno = new Mensaje(0,"ok",opcion[0],cuerpo);
-		} else {
-		//otros tipos a considerar
+                
+            //por defecto
+                cuerpo = Integer.toString(opcion[1]);
+            if (opcion[1] == -1){
+                cuerpo = "deslogueo";
+            }
+            if (opcion[1] == -2){
+                cuerpo = "Desconexión";
+            }
+            
+            retorno = new Mensaje(0,"ok",opcion[0],cuerpo);
+        } else {
+        //otros tipos a considerar
 
-			switch (tipo) {
-				case 6: // conexion TCP establecida
+            switch (tipo) {
+                case 6: // conexion TCP establecida
                     retorno = new Mensaje(0,"ok",6,"Conexion TCP establecida");
                     break;
-				case 7: // inicio se sesion 
+                case 7: // inicio se sesion 
                     String login = menuLogin();
                     retorno = new Mensaje(0,"ok",7,login);
                     break;
@@ -134,15 +134,15 @@ public class TCPClient {
                 //case 69:
                 //    retorno = new Mensaje(0,"ok",69,menuRoot(recibidoServidor.getCuerpo()));
                 //    break;
-				
-				
-				default:
+                
+                
+                default:
                     retorno = new Mensaje(1,"Ultimo mensaje recibido del servidor no esta dentro del protocolo",6,"");
                     break;
-			}
-		}
+            }
+        }
 
-		return retorno;	
-	}
-	
+        return retorno;    
+    }
+    
 }
