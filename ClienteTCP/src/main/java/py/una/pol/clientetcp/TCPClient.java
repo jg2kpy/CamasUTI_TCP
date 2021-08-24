@@ -3,6 +3,7 @@ package py.una.pol.clientetcp;
 import java.io.*;
 import java.net.*;
 import static py.una.pol.clientetcp.Menu.menuError;
+import static py.una.pol.clientetcp.Menu.Menu;
 import py.una.pol.clientetcp.clases.Mensaje;
 
 public class TCPClient {
@@ -54,14 +55,16 @@ public class TCPClient {
         Mensaje enviaraServidor = null;
 		Mensaje recibidoServidor = null;
         
+		////COMUNICACION////////////////////////////////////////////////////////
 		try{
 				while ((fromServer = in.readLine()) != null) {
 					// recibimos el mensaje del servidor
 					recibidoServidor = new Mensaje(fromServer);
-					System.out.println("Server: "+fromServer);
-					
-					//procesamos lo recibido y mandamos una respuesta acorde
+
+					//procesamos lo recibido y preparamos nuestra respuesta
 					enviaraServidor = procesarMensaje(recibidoServidor);
+
+					//mandamos la respuesta al servidor
 					if(enviaraServidor!=null){
 						out.println(enviaraServidor.toJSON());
 					}else{
@@ -71,26 +74,60 @@ public class TCPClient {
 		}catch(SocketTimeoutException exTime){
 			System.out.println("Tiempo de espera agotado para recepcion de datos del servidor " );
 		}
-
-			out.close();
-			in.close();
-			stdIn.close();
-			kkSocket.close();
-		}
+		////FIN DE COMUNICACION/////////////////////////////////////////////////
+		out.close();
+		in.close();
+		stdIn.close();
+		kkSocket.close();
+	}
 
 
 	public static Mensaje procesarMensaje(Mensaje recibidoServidor){
 		Mensaje retorno = null;
-
-		Mensaje mensaje = recibidoServidor;
 		
-		int[] opcion;
-		int tipo = mensaje.getTipo_operacion();
-
-		if (mensaje.getEstado()!=0){
+    	// solo si es 0 es operacion exitosa
+		// si el estado es !=0 el cuerpo es el mensaje de error
+		if (recibidoServidor.getEstado()!=0){
 			menuError(recibidoServidor.getMensaje());
 		}
 
+
+		int[] opcion;
+		int tipo = recibidoServidor.getTipo_operacion();
+		
+		// para los casos comunes de tipo
+		if (tipo>=1 && tipo<=5){
+			//tipo 1 es ver_estado
+			if((tipo==1) && !(recibidoServidor.getCuerpo().equals(""))){
+                // ###imprimir el cuerpo####
+			}
+			
+			opcion = Menu();
+            String cuerpo;
+				
+			//por defecto
+				cuerpo = Integer.toString(opcion[1]);
+			if (opcion[1] == -1){
+				cuerpo = "deslogueo";
+			}
+			if (opcion[1] == -2){
+				cuerpo = "Desconexión";
+			}
+			
+			retorno = new Mensaje(0,"ok",opcion[0],cuerpo);
+		} else {
+		//otros tipos a considerar
+
+			switch (tipo) {
+				case 6: //conexion tcp establecida
+				case 7: //inicio de sesion
+				
+				
+				default:
+                    retorno = new Mensaje(1,"Ultimo mensaje recibido del servidor no esta dentro del protocolo",6,"");
+                    break;
+			}
+		}
 
 		return retorno;	
 	}
