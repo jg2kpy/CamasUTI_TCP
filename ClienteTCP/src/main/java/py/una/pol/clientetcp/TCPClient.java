@@ -104,7 +104,7 @@ public class TCPClient {
                 // ###imprimir el cuerpo####
 			}
 			
-			opcion = Menu();
+			opcion = menuCLI();
             String cuerpo;
 				
 			//por defecto

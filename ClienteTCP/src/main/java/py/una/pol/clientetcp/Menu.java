@@ -23,6 +23,8 @@ public class Menu {
         return nombreHospital + ":" + pass;
     }
     
+
+	// futura implementacion del menu en UI
     public static int[] Menu(){
 	//retorna un vector de 2 elementos, 
 	//	el primero es el tipo_operacion del mensaje que se va a enviar
