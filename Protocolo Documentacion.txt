@@ -1,0 +1,24 @@
+estado:
+	si se recibi un numero diferente a 0
+	se mostrara el mensaje que recibe el servidor
+
+tipo_operacion:
+	1: ver_estado
+		cuerpo: se recibe el estado de ese hospital
+	2: crear_cama
+		cuerpo: la cantidad de camas que se desea agregar
+	3: eliminar_cama
+		cuerpo: la cantidad de camas que se desea eliminar
+	4: ocupar_cama
+		cuerpo: el numero de cama que se desea ocupar
+	5: desocupar_cama
+		cuerpo: el numero de cama que se desea desocupar
+	6: relacionado a establecer comunicacion TCP
+		cuerpo: estado de la comunicacion TCP
+	7: relacionado a procesos de iniciar seccion
+		cuerpo: user y password
+	8: seccion autentificada, iniciando seccion..
+		cuerpo: confirmacion de la seccion
+
+	69: root
+		cuerpo: informe completo y que operacion sobre server desea hacer el root
