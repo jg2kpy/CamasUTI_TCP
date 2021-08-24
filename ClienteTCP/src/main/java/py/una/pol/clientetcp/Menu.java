@@ -1,6 +1,7 @@
 package py.una.pol.clientetcp;
 
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  *

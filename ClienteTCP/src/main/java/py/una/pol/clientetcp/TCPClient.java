@@ -2,6 +2,7 @@ package py.una.pol.clientetcp;
 
 import java.io.*;
 import java.net.*;
+import static py.una.pol.clientetcp.Menu.menuError;
 import py.una.pol.clientetcp.clases.Mensaje;
 
 public class TCPClient {
@@ -51,25 +52,47 @@ public class TCPClient {
         BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
         String fromServer;
         Mensaje enviaraServidor = null;
+		Mensaje recibidoServidor = null;
         
-	try{
-            while ((fromServer = in.readLine()) != null) {
-		Mensaje recibidoServidor = new Mensaje(fromServer);
-                System.out.println("Server: "+fromServer);
-                //Mensaje enviaraServidor = procesarMensaje(recibidoServidor);
-                if(enviaraServidor!=null){
-                    out.println(enviaraServidor.toJSON());
-                }else{
-                    System.out.println("ERROR");
-                }
-            }
-	}catch(SocketTimeoutException exTime){
-		System.out.println("Tiempo de espera agotado para recepcion de datos del servidor " );
-	}
+		try{
+				while ((fromServer = in.readLine()) != null) {
+					// recibimos el mensaje del servidor
+					recibidoServidor = new Mensaje(fromServer);
+					System.out.println("Server: "+fromServer);
+					
+					//procesamos lo recibido y mandamos una respuesta acorde
+					enviaraServidor = procesarMensaje(recibidoServidor);
+					if(enviaraServidor!=null){
+						out.println(enviaraServidor.toJSON());
+					}else{
+						System.out.println("ERROR");
+					}
+				}
+		}catch(SocketTimeoutException exTime){
+			System.out.println("Tiempo de espera agotado para recepcion de datos del servidor " );
+		}
+
+			out.close();
+			in.close();
+			stdIn.close();
+			kkSocket.close();
+		}
+
+
+	public static Mensaje procesarMensaje(Mensaje recibidoServidor){
+		Mensaje retorno = null;
+
+		Mensaje mensaje = recibidoServidor;
 		
-        out.close();
-        in.close();
-        stdIn.close();
-        kkSocket.close();
-    }
+		int[] opcion;
+		int tipo = mensaje.getTipo_operacion();
+
+		if (mensaje.getEstado()!=0){
+			menuError(recibidoServidor.getMensaje());
+		}
+
+
+		return retorno;	
+	}
+	
 }
