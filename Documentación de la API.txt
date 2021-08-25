@@ -1,3 +1,16 @@
+Puerto por defecto: 6969
+
+Para la representación de datos se utiliza cadenas de texto en formato/notación JSON.
+Cada interacción entre los intervinientes contiene los siguientes atributos:
+
+{
+	“estado”: integer
+	“mensaje”: String
+	“tipo_operacion”: integer
+	“cuerpo”: String
+}
+
+
 estado:
 	si se recibi un numero diferente a 0
 	se mostrara el mensaje que recibe el servidor
