@@ -12,6 +12,15 @@ public class TCPClient {
 
     public static void main(String[] args) throws Exception {
 
+        String IPv4 = args[0];
+        String DNS = args[1];
+        int port = Integer.parseInt(args[2]);
+        
+        if (IPv4.equals("")){
+            InetAddress address = InetAddress.getByName(DNS);
+            IPv4 = address.getHostAddress();
+        }
+        
         Socket kkSocket = null;
         PrintWriter out = null;
         BufferedReader in = null;
@@ -23,7 +32,7 @@ public class TCPClient {
 
         try {
 
-            SocketAddress sockaddr = new InetSocketAddress("localhost", 6969);
+            SocketAddress sockaddr = new InetSocketAddress(IPv4, port);
             //SocketAddress sockaddr = new InetSocketAddress("200.10.229.161", 8080);
             kkSocket = new Socket();
 
