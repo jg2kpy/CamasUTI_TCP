@@ -24,6 +24,11 @@ public class Menu {
         return nombreHospital + ":" + pass;
     }
     
+    public static int variacion = 0;
+    public static int aCambiar = -1;
+    public static boolean ocupar = true;
+    public static boolean tareaEnColada = false;
+    public static boolean salir = false;
 
     // futura implementacion del menu en UI
     public static int[] Menu(){
