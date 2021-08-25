@@ -2,9 +2,8 @@ package py.una.pol.clientetcp;
 
 import java.io.*;
 import java.net.*;
+import static py.una.pol.clientetcp.Menu.MenuGUI;
 import static py.una.pol.clientetcp.Menu.menuError;
-import static py.una.pol.clientetcp.Menu.Menu;
-import static py.una.pol.clientetcp.Menu.menuCLI;
 import static py.una.pol.clientetcp.Menu.menuLogin;
 import py.una.pol.clientetcp.clases.Mensaje;
 
@@ -111,7 +110,7 @@ public class TCPClient {
                 Menu.imprimirEstado();
             }
             
-            opcion = menuCLI(); //retorna lo que eligio el cliente
+            opcion = MenuGUI(); //retorna lo que eligio el cliente
             String cuerpo;
                 
             //por defecto
