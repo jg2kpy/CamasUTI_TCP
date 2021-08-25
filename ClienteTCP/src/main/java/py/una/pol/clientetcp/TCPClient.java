@@ -5,6 +5,7 @@ import java.net.*;
 import static py.una.pol.clientetcp.Menu.MenuGUI;
 import static py.una.pol.clientetcp.Menu.menuError;
 import static py.una.pol.clientetcp.Menu.menuLogin;
+import static py.una.pol.clientetcp.Menu.menuRoot;
 import py.una.pol.clientetcp.clases.Mensaje;
 
 public class TCPClient {
@@ -37,14 +38,13 @@ public class TCPClient {
             in = new BufferedReader(new InputStreamReader(kkSocket.getInputStream()));
         }catch (SocketTimeoutException e){
             fin = System.currentTimeMillis();
-            System.err.println("Fallo de Timeout de conexion en " + TimeOutConexion);
-            System.err.println("Duracion " + (fin-ini));
+            menuError("Fallo de Timeout de conexion en " + TimeOutConexion + ", duracion " + (fin-ini));
             System.exit(1);
         }catch (UnknownHostException e) {
-            System.err.println("Host desconocido");
+            menuError("Host desconocido");
             System.exit(1);
         } catch (IOException e) {
-            System.err.println("Error de I/O en la conexion al host");
+            menuError("Error de I/O en la conexion al host");
             System.exit(1);
         }
         
@@ -107,7 +107,7 @@ public class TCPClient {
             if((tipo==1) && !(recibidoServidor.getCuerpo().equals(""))){
                 // ###imprimir el cuerpo####
                 Menu.estadoActual = recibidoServidor.getCuerpo();
-                Menu.imprimirEstado();
+                //Menu.imprimirEstado();
             }
             
             opcion = MenuGUI(); //retorna lo que eligio el cliente
@@ -132,16 +132,17 @@ public class TCPClient {
                     break;
                 case 7: // inicio se sesion 
                     String login = menuLogin();
+                    if(login.equals("root:root")){
+                        return new Mensaje(0,"ok",69,login);
+                    }
                     retorno = new Mensaje(0,"ok",7,login);
                     break;
                 case 8:
                     retorno = new Mensaje(0,"ok",1,"0");
                     break;
-                //case 69:
-                //    retorno = new Mensaje(0,"ok",69,menuRoot(recibidoServidor.getCuerpo()));
-                //    break;
-                
-                
+                case 69:
+                    retorno = new Mensaje(0,"ok",69,menuRoot(recibidoServidor.getCuerpo()));
+                    break; 
                 default:
                     retorno = new Mensaje(1,"Ultimo mensaje recibido del servidor no esta dentro del protocolo",6,"");
                     break;

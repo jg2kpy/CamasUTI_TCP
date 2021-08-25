@@ -107,23 +107,23 @@ public class TCPServerHilo extends Thread {
                     }  
                     break;
                 case 69:
-                switch (recibidoCliente.getCuerpo()) {
-                    case "Detener":
-                        try {
-                            servidor.detener();
-                        } catch (IOException ex) {
-                            Logger.getLogger(TCPServerHilo.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        break;
-                    case "Matar":
-                        servidor.killProcess();
-                        break;
-                    case "Apagar":
-                        servidor.apagar();
-                        break;
-                    default:
-                        break;
-                }
+                    switch (recibidoCliente.getCuerpo()) {
+                        case "Detener":
+                            try {
+                                servidor.detener();
+                            } catch (IOException ex) {
+                                Logger.getLogger(TCPServerHilo.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            break;
+                        case "Matar":
+                            servidor.killProcess();
+                            break;
+                        case "Apagar":
+                            servidor.apagar();
+                            break;
+                        default:
+                            break;
+                    }
                     retorno = new Mensaje(0,"ok",69,informe());
                     break;
 

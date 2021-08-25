@@ -173,6 +173,5 @@ public class Menu {
         JOptionPane.showMessageDialog(null, panel, "Menu ROOT: ",JOptionPane.PLAIN_MESSAGE);
         return accionRoot;        
     }
-    
 }
 
