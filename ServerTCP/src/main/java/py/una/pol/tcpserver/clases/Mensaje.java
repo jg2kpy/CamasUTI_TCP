@@ -1,4 +1,4 @@
-package py.una.pol.servertcp.clases;
+package py.una.pol.tcpserver.clases;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
