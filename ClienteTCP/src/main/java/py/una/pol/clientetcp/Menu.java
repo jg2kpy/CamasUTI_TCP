@@ -115,5 +115,8 @@ public class Menu {
         }
         return retorno;
     }
+    
+    public static String accionRoot = "root:root";
+    
 }
 
