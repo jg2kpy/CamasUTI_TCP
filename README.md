@@ -59,7 +59,7 @@ Mínimamente JDK 1.8 y un IDE que soporte proyectos Java Maven como por ejemplo 
 ## Compilación y ejecución
    El primer paso es clonar el repositorio en un directorio local.
    
-   ![imagen](https://user-images.githubusercontent.com/46907456/130884696-9d785119-5c44-4a1b-bcb8-e9d86f5cc21f.png)
+   ![imagen](https://user-images.githubusercontent.com/46907456/130639591-36d98244-2169-4067-800a-aa427e927f80.png)
 
     $ git clone https://github.com/jg2kpy/CamasUTI_TCP.git
 
