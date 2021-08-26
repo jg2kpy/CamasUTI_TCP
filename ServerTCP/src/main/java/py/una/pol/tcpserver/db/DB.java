@@ -1,27 +1,41 @@
 package py.una.pol.tcpserver.db;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import py.una.pol.tcpserver.TCPServer;
 import py.una.pol.tcpserver.clases.Hospital;
 
 
 public class DB {
     //Coneccion con la Base de Datos
-    private static Connection connect() {
-        Connection conn = null;
-        String directorio = System.getProperty("user.dir");
-        directorio = "jdbc:sqlite:" + directorio + File.separator + "DB" + File.separator + "dataBase.db";
-        String url = directorio;
+    private static Connection connect(){
         try {
-            conn = DriverManager.getConnection(url);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Connection conn = null;
+            //String directorio = System.getProperty("user.dir");
+            TCPServer test = new TCPServer();
+            String directorio = URLDecoder.decode(test.url.getFile(), "UTF-8");
+            int pos = directorio.indexOf("/target/classes/", 0);
+            directorio = directorio.substring(0, pos);
+            directorio = "jdbc:sqlite:" + directorio + File.separator + "DB" + File.separator + "dataBase.db";
+            System.out.println(directorio);
+            try {
+                conn = DriverManager.getConnection(directorio);
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            return conn;
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return conn;
+        return null;
     }
     
     public static Hospital login(String user,String pass){

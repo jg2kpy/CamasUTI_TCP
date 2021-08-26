@@ -15,6 +15,8 @@ public class TCPServer {
     
     static int port = 6969;
     
+    public URL url = this.getClass().getProtectionDomain().getCodeSource().getLocation();
+    
     //variables compartidas
     boolean listening = true;
     public List<TCPServerHilo> hilosClientes; //almacenar los hilos (no se utiliza en el ejemplo, se deja para que el alumno lo utilice)
