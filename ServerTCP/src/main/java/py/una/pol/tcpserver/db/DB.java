@@ -25,7 +25,7 @@ public class DB {
             int pos = directorio.indexOf("/target/classes/", 0);
             directorio = directorio.substring(0, pos);
             directorio = "jdbc:sqlite:" + directorio + File.separator + "DB" + File.separator + "dataBase.db";
-            System.out.println(directorio);
+            //System.out.println(directorio);
             try {
                 conn = DriverManager.getConnection(directorio);
             } catch (SQLException e) {
