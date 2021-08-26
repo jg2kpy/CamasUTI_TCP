@@ -34,7 +34,7 @@ Mínimamente JDK 1.8 y un IDE que soporte proyectos Java Maven como por ejemplo 
    https://netbeans.apache.org/download/nb120/nb120.html
    
 ### macOS Family
-   Seguir esta video tutorial: https://www.youtube.com/watch?v=gDKhuC4LDQk
+   Seguir este video tutorial: https://www.youtube.com/watch?v=gDKhuC4LDQk
 
 ## Base de datos SQLite
    El proyecto ServerTCP ya trae una base de datos poblada en el fichero CamasUTI_TCP\ServerTCP\DB\dataBase.db con el cual ya se puede hacer pruebas, por lo tanto no es necesario crear la base de datos y poblarla.
