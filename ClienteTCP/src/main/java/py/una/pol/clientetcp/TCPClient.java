@@ -50,7 +50,7 @@ public class TCPClient {
             in = new BufferedReader(new InputStreamReader(kkSocket.getInputStream()));
         }catch (SocketTimeoutException e){
             fin = System.currentTimeMillis();
-            menuError("Fallo de Timeout de conexion en " + TimeOutConexion + ", duracion " + (fin-ini));
+            menuError("Ocurrio un fallo en el timeout de la conexion en " + TimeOutConexion + ", la duracion es de " + (fin-ini));
             System.exit(1);
         }catch (UnknownHostException e) {
             menuError("Host desconocido");
