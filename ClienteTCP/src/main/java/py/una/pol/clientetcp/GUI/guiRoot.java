@@ -52,7 +52,7 @@ public class guiRoot extends javax.swing.JPanel {
         });
 
         jLabel3.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel3.setText("Que desea hacer root?");
+        jLabel3.setText("Que desea hacer usuario root?");
 
         rbDetener.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         rbDetener.setText("Detener servicio");
@@ -63,7 +63,7 @@ public class guiRoot extends javax.swing.JPanel {
         });
 
         rbMatar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        rbMatar.setText("Matar proceso server");
+        rbMatar.setText("Terminar proceso server");
         rbMatar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbMatarActionPerformed(evt);
