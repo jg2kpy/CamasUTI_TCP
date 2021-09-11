@@ -8,6 +8,9 @@ import static py.una.pol.clientetcp.Menu.menuLogin;
 import static py.una.pol.clientetcp.Menu.menuRoot;
 import py.una.pol.clientetcp.clases.Mensaje;
 
+// este texto fue añadido por Alejandro Cabral
+// para el primer parcial de SD el 11/09/21
+
 public class TCPClient {
 
     public static void main(String[] args) throws Exception {
