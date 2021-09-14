@@ -25,7 +25,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>py.una.pol.servertcp.TCPServer</mainClass>
+							<mainClass>py.una.pol.tcpserver.TCPServer</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
